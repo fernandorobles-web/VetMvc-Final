@@ -1,0 +1,84 @@
+﻿@model VetMvc.Models.Mascota
+@{
+    ViewData["Title"] = "Nueva Mascota";
+}
+<h1>Nueva Mascota</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div> <!-- ALL para ver errores de binder -->
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label asp-for="DuenoId" class="form-label">Dueño</label>
+            <select asp-for="DuenoId" asp-items="ViewBag.DuenoId" class="form-select"></select>
+            <span asp-validation-for="DuenoId" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-6">
+            <label asp-for="EspecieId" class="form-label">Especie</label>
+            <select asp-for="EspecieId" asp-items="ViewBag.EspecieId" class="form-select"></select>
+            <span asp-validation-for="EspecieId" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-6">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="Sexo" class="form-label"></label>
+            <select asp-for="Sexo" class="form-select">
+                <option value="M">M</option>
+                <option value="H">H</option>
+            </select>
+            <span asp-validation-for="Sexo" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="FechaNacimiento" class="form-label"></label>
+            <input asp-for="FechaNacimiento" type="date" class="form-control" />
+            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="mb-3 col-md-3">
+            <label asp-for="PesoKg" class="form-label"></label>
+            <!-- Usa texto para evitar lío coma/punto -->
+            <input asp-for="PesoKg" class="form-control" inputmode="decimal" />
+            <span asp-validation-for="PesoKg" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="Chip" class="form-label"></label>
+            <input asp-for="Chip" class="form-control" />
+            <span asp-validation-for="Chip" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3">
+            <label asp-for="Color" class="form-label"></label>
+            <input asp-for="Color" class="form-control" />
+            <span asp-validation-for="Color" class="text-danger"></span>
+        </div>
+        <div class="mb-3 col-md-3 form-check mt-4">
+            <input class="form-check-input" asp-for="Esterilizado" />
+            <label class="form-check-label" asp-for="Esterilizado"></label>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Observaciones" class="form-label"></label>
+        <textarea asp-for="Observaciones" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="Observaciones" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+
+

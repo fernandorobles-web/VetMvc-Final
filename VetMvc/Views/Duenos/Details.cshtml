@@ -1,0 +1,63 @@
+﻿@model VetMvc.Models.Dueno
+@{
+    ViewData["Title"] = "Detalle Dueño";
+}
+
+<h1 class="mb-2">Detalle de Dueño</h1>
+
+<h2 class="h4 mb-1">@Model.Nombres @Model.Apellidos</h2>
+
+<div class="text-muted mb-3">
+    <i class="bi bi-person-vcard"></i> RUT: @Model.Rut
+    @if (!string.IsNullOrWhiteSpace(Model.Telefono))
+    {
+        <span class="ms-3"><i class="bi bi-telephone"></i> @Model.Telefono</span>
+    }
+    @if (!string.IsNullOrWhiteSpace(Model.Email))
+    {
+        <span class="ms-3"><i class="bi bi-envelope"></i> @Model.Email</span>
+    }
+</div>
+
+
+<div class="card">
+    <div class="card-header">Información</div>
+    <div class="card-body">
+        <<dl class="row">
+            <dt class="col-sm-3">RUT</dt>
+            <dd class="col-sm-9">@Model.Rut</dd>
+            <dt class="col-sm-3">Nombres</dt>
+            <dd class="col-sm-9">@Model.Nombres</dd>
+            <dt class="col-sm-3">Apellidos</dt>
+            <dd class="col-sm-9">@Model.Apellidos</dd>
+            <dt class="col-sm-3">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+            <dt class="col-sm-3">Teléfono</dt>
+            <dd class="col-sm-9">@Model.Telefono</dd>
+            <dt class="col-sm-3">Dirección</dt>
+            <dd class="col-sm-9">@Model.Direccion</dd>
+            <dt class="col-sm-3">Activo</dt>
+            <dd class="col-sm-9">@Model.Activo</dd>
+        </dl>
+    </div>
+</div>
+
+
+<h5>Mascotas</h5>
+@if (Model.Mascota != null && Model.Mascota.Any())
+{
+    <ul>
+        @foreach (var m in Model.Mascota)
+        {
+            <li>@m.Nombre (@m.Especie?.Nombre)</li>
+        }
+    </ul>
+}
+else
+{
+
+    <p><em>Sin mascotas.</em></p>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

@@ -1,0 +1,130 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - VetMvc</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+    @await RenderSectionAsync("Styles", required: false)   <!-- ← agrega esto -->
+
+</head>
+<body>
+    <header class="topbar py-2">
+        <div class="container d-flex align-items-center justify-content-between">
+            <!-- Marca -->
+            <a class="brand-text fw-bold text-white text-decoration-none d-flex align-items-center" asp-controller="Home" asp-action="Index">
+                <i class="bi bi-shield-plus me-2"></i> VetCare Clínica
+            </a>
+
+            <!-- MENÚ -->
+            <nav class="d-none d-md-block">
+                <ul class="nav top-menu">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">
+                            <i class="bi bi-house"></i> Inicio
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Duenos" asp-action="Index">
+                            Dueños
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Mascotas" asp-action="Index">
+                            Mascotas
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Atenciones" asp-action="Index">
+                            Atenciones
+                        </a>
+                    </li>
+                    @* Si quieres mostrar Usuarios, déjalo; si no, quítalo *@
+                    @if (User.IsInRole("Administrador"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Usuarios" asp-action="Index">
+                                Usuarios
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </nav>
+
+            <!-- Lado derecho -->
+            <div class="d-flex align-items-center gap-2">
+                @if (User.Identity?.IsAuthenticated ?? false)
+                {
+                    <div class="dropdown">
+                        <button class="btn btn-outline-light btn-sm dropdown-toggle d-flex align-items-center"
+                                type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle me-1"></i>
+                            <span class="me-2">@User.Identity!.Name</span>
+                            <span class="badge bg-light text-dark">
+                                @User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value
+                            </span>
+                        </button>
+
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li>
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="Perfil">
+                                    <i class="bi bi-person"></i> Mi Perfil
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" asp-controller="Auth" asp-action="CambiarPassword">
+                                    <i class="bi bi-key"></i> Cambiar Contraseña
+                                </a>
+                            </li>
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <form class="px-3 m-0" asp-controller="Auth" asp-action="Logout" method="post">
+                                    <button class="dropdown-item text-danger px-0">
+                                        <i class="bi bi-box-arrow-right"></i> Cerrar Sesión
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <a class="btn btn-sm btn-outline-light" asp-controller="Auth" asp-action="Login">
+                        Iniciar sesión
+                    </a>
+                }
+            </div>
+        </div>
+    </header>
+    
+    <main role="main" class="py-4">
+        <div class="container container-narrow">
+            <div class="page-title">
+                <span class="dot"></span>
+                <span>@ViewData["Title"]</span>
+            </div>
+
+            @await Html.PartialAsync("_Alerts")
+            @RenderBody()
+        </div>
+    </main>
+
+    <footer class="site-footer py-4 mt-5">
+        <div class="container container-narrow d-flex flex-wrap justify-content-between align-items-center">
+            <div>© @DateTime.Now.Year VetCare Clínica</div>
+            <div class="small">
+                <i class="bi bi-geo-alt"></i> Av. Siempre Viva 123 ·
+                <i class="bi bi-telephone"></i> +56 9 5555 5555
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

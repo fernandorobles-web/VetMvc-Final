@@ -1,0 +1,50 @@
+﻿@model VetMvc.Models.Usuario
+@{
+    ViewData["Title"] = "Detalle de Usuario";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="page-title"><span class="dot"></span> Usuario</h2>
+    <div class="d-flex gap-2">
+        <a asp-action="Index" class="btn btn-sm btn-outline-secondary">
+            <i class="bi bi-arrow-left"></i> Volver
+        </a>
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-warning">
+            <i class="bi bi-pencil-square"></i> Editar
+        </a>
+    </div>
+</div>
+
+@await Html.PartialAsync("_Alerts")
+
+<div class="card shadow-sm">
+    <div class="card-header bg-white fw-semibold d-flex align-items-center gap-2">
+        <i class="bi bi-person-circle"></i> @Model.NombreCompleto
+        <span class="badge bg-info text-dark">@Model.Rol</span>
+        <span class="badge @(Model.Activo ? "bg-success" : "bg-secondary")">
+            @(Model.Activo ? "Activo" : "Inactivo")
+        </span>
+    </div>
+
+    <div class="card-body">
+        <dl class="row mb-0">
+            <dt class="col-sm-3 text-muted">Usuario</dt>
+            <dd class="col-sm-9">@Model.NombreUsuario</dd>
+
+            <dt class="col-sm-3 text-muted">Email</dt>
+            <dd class="col-sm-9">@Model.Email</dd>
+
+            <dt class="col-sm-3 text-muted">Fecha de Registro</dt>
+            <dd class="col-sm-9">@Model.FechaCreacion.ToString("dd-MM-yyyy HH:mm")</dd>
+
+            @if (Model.UltimoAcceso.HasValue)
+            {
+                <dt class="col-sm-3 text-muted">Último Acceso</dt>
+                <dd class="col-sm-9">@Model.UltimoAcceso.Value.ToString("dd-MM-yyyy HH:mm")</dd>
+            }
+
+            <dt class="col-sm-3 text-muted">Id</dt>
+            <dd class="col-sm-9">#@Model.Id</dd>
+        </dl>
+    </div>
+</div>

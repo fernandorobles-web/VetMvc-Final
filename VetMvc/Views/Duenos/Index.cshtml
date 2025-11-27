@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Dueno>
+@{
+    ViewData["Title"] = "Dueños";
+}
+<div class="d-flex gap-2 mb-3">
+    <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nuevo Dueño</a>
+    <a asp-action="ExportExcel" class="btn btn-outline-primary"><i class="bi bi-file-earmark-excel"></i> Excel</a>
+    <a asp-action="ExportPdf" class="btn btn-outline-danger"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+</div>
+
+
+
+<div class="card">
+    <div class="card-header">Listado</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>RUT</th>
+                        <th>Nombres</th>
+                        <th>Apellidos</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var d in Model)
+                    {
+                        <tr>
+                            <td>@d.Rut</td>
+                            <td>@d.Nombres</td>
+                            <td>@d.Apellidos</td>
+                            <td>@d.Email</td>
+                            <td>@d.Telefono</td>
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@d.Id" class="btn btn-sm btn-secondary">Ver</a>
+                                <a asp-action="Edit" asp-route-id="@d.Id" class="btn btn-sm btn-warning">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@d.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+         
+        </div>
+    </div>
+</div>

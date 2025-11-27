@@ -1,0 +1,337 @@
+/* ====== VET THEME – sitio profesional para veterinaria ====== */
+
+/* Paleta (inspiración “verde clínica + cálido”)
+   Primario  : #0E9384  (teal)
+   Secundario: #F4A261  (miel/cálido)
+   Énfasis   : #2A9D8F  (teal claro)
+   Fondo     : #F6FAF9
+   Texto     : #203234
+*/
+:root {
+    --brand-primary: #0E9384;
+    --brand-primary-rgb: 14,147,132;
+    --brand-secondary: #F4A261;
+    --brand-accent: #2A9D8F;
+    --brand-bg: #F6FAF9;
+    --brand-text: #203234;
+    /* Mapea a variables de Bootstrap 5.3 para que botones/alerts adopten el color */
+    --bs-primary: var(--brand-primary);
+    --bs-primary-rgb: var(--brand-primary-rgb);
+    --bs-secondary: var(--brand-secondary);
+    --bs-body-bg: var(--brand-bg);
+    --bs-body-color: var(--brand-text);
+}
+
+/* Tipografía profesional (Inter / system fallbacks) */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+html, body {
+    font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+}
+
+body {
+    background: var(--brand-bg);
+    color: var(--brand-text);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+    box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    background: #ffffff;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    font-weight: 700;
+    color: var(--brand-primary);
+}
+
+.brand-logo {
+    width: 28px;
+    height: 28px;
+    display: inline-block;
+    border-radius: 8px;
+    background: radial-gradient( circle at 60% 40%, #37c5b4 0 40%, #0e9384 41% 100% );
+    position: relative;
+}
+
+    .brand-logo::after {
+        content: "";
+        position: absolute;
+        inset: 8px 6px auto auto;
+        width: 8px;
+        height: 8px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: -10px 6px 0 0 #fff, -6px -6px 0 0 #fff, -2px 2px 0 0 #fff; /* huellita */
+    }
+
+.nav-link {
+    font-weight: 600;
+}
+
+    .nav-link.active, .nav-link:focus, .nav-link:hover {
+        color: var(--brand-primary);
+    }
+
+/* Navbar: links verdes */
+.navbar {
+    /* Colores de Bootstrap 5 para navbar */
+    --bs-navbar-color: var(--brand-primary);
+    --bs-navbar-hover-color: #0b786b;
+    --bs-navbar-active-color: var(--brand-primary);
+    --bs-navbar-brand-color: var(--brand-primary);
+    --bs-navbar-brand-hover-color: #0b786b;
+}
+
+    /* Asegurar color verde incluso si Bootstrap intenta poner azul */
+    .navbar .nav-link {
+        color: var(--brand-primary) !important;
+    }
+
+        .navbar .nav-link:hover,
+        .navbar .nav-link:focus,
+        .navbar .nav-link.active {
+            color: #0b786b !important;
+        }
+     
+
+/* ---------- Contenedores & títulos ---------- */
+.container-narrow {
+    max-width: 1080px;
+}
+
+.page-title {
+    font-weight: 700;
+    letter-spacing: .2px;
+    margin: 1.2rem 0 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+}
+
+    .page-title .dot {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: var(--brand-secondary);
+        box-shadow: 0 0 0 6px rgba(244,162,97,.18);
+    }
+
+/* ---------- Cards ---------- */
+.card {
+    border: 1px solid rgba(0,0,0,.06);
+    box-shadow: 0 6px 18px rgba(0,0,0,.05);
+    border-radius: 14px;
+}
+
+.card-header {
+    background: #fff;
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    font-weight: 600;
+}
+
+/* ---------- Tablas ---------- */
+.table {
+    --tbl-border: rgba(0,0,0,.06);
+    border-color: var(--tbl-border);
+}
+
+    .table thead th {
+        background: #ffffff;
+        border-bottom: 2px solid var(--tbl-border);
+        font-weight: 700;
+    }
+
+    .table tbody tr:hover {
+        background: rgba(14,147,132,.06);
+    }
+
+/* ---------- Formularios ---------- */
+.form-label {
+    font-weight: 600;
+}
+
+.form-control, .form-select, .form-check-input {
+    border-radius: 10px;
+    border-color: rgba(0,0,0,.18);
+}
+
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(var(--brand-primary-rgb), .6);
+        box-shadow: 0 0 0 .2rem rgba(var(--brand-primary-rgb), .20);
+    }
+
+.input-group-text {
+    background: #fff;
+}
+
+/* Validación */
+.text-danger, .field-validation-error {
+    font-size: .9rem;
+}
+
+.validation-summary-errors ul {
+    margin-bottom: 0
+}
+
+/* ---------- Botones ---------- */
+.btn-primary {
+    background: linear-gradient(180deg, #11a596 0%, #0e9384 100%);
+    border: none;
+}
+
+    .btn-primary:hover {
+        filter: brightness(.97);
+    }
+
+.btn-outline-primary {
+    color: var(--brand-primary);
+    border-color: var(--brand-primary);
+}
+
+    .btn-outline-primary:hover {
+        background: rgba(var(--brand-primary-rgb),.08);
+    }
+
+/* ---------- Badges útiles en veterinaria ---------- */
+.badge-specie {
+    background: rgba(var(--brand-primary-rgb),.12);
+    color: var(--brand-primary);
+    font-weight: 600;
+}
+
+.badge-sex-m {
+    background: #e0f7f3;
+    color: #0e9384;
+}
+
+.badge-sex-h {
+    background: #fde9d5;
+    color: #ba640b;
+}
+
+.badge-status-ok {
+    background: #E8F5E9;
+    color: #1B5E20;
+}
+
+.badge-status-alert {
+    background: #FFF3CD;
+    color: #8A6D3B;
+}
+
+/* ---------- Alerts ---------- */
+.alert {
+    border: none;
+    border-radius: 14px;
+    box-shadow: 0 10px 24px rgba(0,0,0,.06);
+}
+
+.alert-success {
+    background: linear-gradient(180deg, #e7fbf6, #eafaf7);
+}
+
+.alert-danger {
+    background: linear-gradient(180deg, #fde7ea, #fdeff1);
+}
+
+.alert-warning {
+    background: linear-gradient(180deg, #fff4dd, #fff6e6);
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+    border-top: 1px solid rgba(0,0,0,.08);
+    background: #fff;
+    color: #5b7073;
+    font-size: .95rem;
+}
+
+/* ---------- Hero (Home) ---------- */
+.hero {
+    background: radial-gradient(1200px 400px at 10% -10%, rgba(14,147,132,.12), transparent 60%), radial-gradient(900px 360px at 100% 0%, rgba(244,162,97,.18), transparent 60%);
+    border-radius: 20px;
+    padding: 2.2rem 1.6rem;
+}
+
+    .hero h1 {
+        font-weight: 800;
+    }
+
+/* ---------- Utilidades ---------- */
+.shadow-soft {
+    box-shadow: 0 12px 30px rgba(0,0,0,.06);
+}
+
+.round-lg {
+    border-radius: 16px;
+}
+
+/* Oculta campo de segundos en inputs nativos WebKit si aparecieran */
+
+input[type="datetime-local"]::-webkit-datetime-edit-second-field {
+    display: none;
+}
+
+input[type="time"]::-webkit-datetime-edit-second-field {
+    display: none;
+}
+
+input[type="datetime-local"]::-webkit-datetime-edit-millisecond-field {
+    display: none;
+}
+
+input[type="time"]::-webkit-datetime-edit-millisecond-field {
+    display: none;
+}
+/* Topbar menu visible sobre fondo verde */
+.topbar .top-menu .nav-link {
+    color: #fff !important;
+    font-weight: 600;
+    opacity: .95;
+}
+
+    .topbar .top-menu .nav-link:hover,
+    .topbar .top-menu .nav-link:focus {
+        color: #fff !important;
+        background: rgba(255,255,255,.12);
+        border-radius: 10px;
+    }
+
+/* ====== FIX header ====== */
+.topbar {
+    background: linear-gradient(90deg, #0d8c82 0%, #0b7a71 100%) !important; /* verde clínico */
+    color: #fff !important;
+}
+
+    .topbar .brand-text {
+        color: #fff !important;
+    }
+
+    .topbar .top-menu .nav-link {
+        color: #fff !important;
+        font-weight: 600;
+        opacity: .95;
+    }
+
+        .topbar .top-menu .nav-link:hover,
+        .topbar .top-menu .nav-link:focus {
+            color: #fff !important;
+            background: rgba(255,255,255,.12);
+            border-radius: 10px;
+        }
+
+    .topbar .btn-outline-light {
+        color: #fff !important;
+        border-color: #fff !important;
+    }
+
+        .topbar .btn-outline-light:hover {
+            background: #fff !important;
+            color: #0b7a71 !important;
+        }
+
+

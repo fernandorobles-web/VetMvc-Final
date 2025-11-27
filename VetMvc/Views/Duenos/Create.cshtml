@@ -1,0 +1,68 @@
+﻿@model Dueno
+@{
+    ViewData["Title"] = "Nuevo Dueño";
+}
+<h1>Nuevo Dueño</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="Rut" class="form-label"></label>
+        <input asp-for="Rut"
+               class="form-control"
+               placeholder="12.345.678-5"
+               maxlength="12"
+               pattern="^(?:\d{7,8}|\d{1,2}(?:\.\d{3}){2})-[0-9Kk]$" />
+        <div class="form-text"></div>
+        <span asp-validation-for="Rut" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Nombres" class="form-label"></label>
+        <input asp-for="Nombres" class="form-control" />
+        <span asp-validation-for="Nombres" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Apellidos" class="form-label"></label>
+        <input asp-for="Apellidos" class="form-control" />
+        <span asp-validation-for="Apellidos" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Email" class="form-label"></label>
+        <input asp-for="Email" type="email" class="form-control" />   <!-- valida email en navegador -->
+        <span asp-validation-for="Email" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Telefono" class="form-label"></label>
+        <input asp-for="Telefono"
+               class="form-control"
+               inputmode="tel"
+               placeholder="912345678 o 56 9 1234 5678" />
+        <span asp-validation-for="Telefono" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Direccion" class="form-label"></label>
+        <input asp-for="Direccion" class="form-control" />
+        <span asp-validation-for="Direccion" class="text-danger"></span>
+    </div>
+
+    <div class="form-check mb-3">
+        <input class="form-check-input" asp-for="Activo" />
+        <label class="form-check-label" asp-for="Activo"></label>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+   
+}

@@ -1,0 +1,61 @@
+﻿@model VetMvc.Models.Atencione
+@{
+    ViewData["Title"] = "Detalle Atención";
+}
+
+<h1 class="mb-2">Detalle de Atención</h1>
+
+<h2 class="h5 mb-1">
+    @Model.Mascota?.Nombre
+    <span class="ms-2 badge badge-specie">@Model.Mascota?.Especie?.Nombre</span>
+    @if (Model.Mascota?.Sexo == "M")
+    {
+        <span class="ms-1 badge badge-sex-m">M</span>
+    }
+    else
+    {
+
+        <span class="ms-1 badge badge-sex-h">H</span>
+    }
+</h2>
+
+<div class="text-muted mb-3">
+    <i class="bi bi-calendar-event"></i>
+    @Model.FechaHora.ToString("dd-MM-yyyy HH:mm")
+    @if (Model.ProximaCita.HasValue)
+    {
+        <span class="ms-3">
+            <i class="bi bi-alarm"></i> Próxima: @Model.ProximaCita.Value.ToString("dd-MM-yyyy HH:mm")
+        </span>
+    }
+    <span class="ms-3">
+        <i class="bi bi-cash-coin"></i> @Model.Costo.ToString("C0")
+    </span>
+</div>
+<div class="card">
+    <div class="card-header">Información</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Fecha y hora</dt>
+            <dd class="col-sm-9">@Model.FechaHora</dd>
+            <dt class="col-sm-3">Mascota</dt>
+            <dd class="col-sm-9">@Model.Mascota?.Nombre</dd>
+            <dt class="col-sm-3">Dueño</dt>
+            <dd class="col-sm-9">@Model.Mascota?.Dueno?.Nombres @Model.Mascota?.Dueno?.Apellidos</dd>
+            <dt class="col-sm-3">Motivo</dt>
+            <dd class="col-sm-9">@Model.Motivo</dd>
+            <dt class="col-sm-3">Diagnóstico</dt>
+            <dd class="col-sm-9">@Model.Diagnostico</dd>
+            <dt class="col-sm-3">Tratamiento</dt>
+            <dd class="col-sm-9">@Model.Tratamiento</dd>
+            <dt class="col-sm-3">Costo</dt>
+            <dd class="col-sm-9">@Model.Costo</dd>
+            <dt class="col-sm-3">Próxima cita</dt>
+            <dd class="col-sm-9">@Model.ProximaCita</dd>
+        </dl>
+    </div>
+</div>
+
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

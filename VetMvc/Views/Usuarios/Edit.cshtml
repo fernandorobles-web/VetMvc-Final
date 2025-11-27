@@ -1,0 +1,66 @@
+﻿@model VetMvc.Models.UsuarioFormVM
+@{
+    ViewData["Title"] = "Editar Usuario";
+}
+
+<partial name="~/Views/Shared/_Alerts.cshtml" />
+<h1>Editar Usuario</h1>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+    <div class="row">
+        <div class="col-md-6 mb-3">
+            <label asp-for="NombreCompleto" class="form-label"></label>
+            <input asp-for="NombreCompleto" class="form-control" />
+            <span asp-validation-for="NombreCompleto" class="text-danger"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="NombreUsuario" class="form-label"></label>
+            <input asp-for="NombreUsuario" class="form-control" />
+            <span asp-validation-for="NombreUsuario" class="text-danger"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="Rol" class="form-label"></label>
+            <select asp-for="Rol" class="form-select">
+                <option>Administrador</option>
+                <option>Veterinario</option>
+                <option>Recepcionista</option>
+            </select>
+            <span asp-validation-for="Rol" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-6 mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <label asp-for="Password" class="form-label"></label>
+            <input asp-for="Password" class="form-control" placeholder="(dejar en blanco para NO cambiar)" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <div class="col-md-3 mb-3">
+            <label asp-for="ConfirmPassword" class="form-label"></label>
+            <input asp-for="ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+
+        <div class="col-md-3 mb-3">
+            <div class="form-check mt-4">
+                <input class="form-check-input" asp-for="Activo" />
+                <label class="form-check-label" asp-for="Activo"></label>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn btn-primary">Guardar cambios</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}

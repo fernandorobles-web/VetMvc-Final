@@ -1,0 +1,41 @@
+﻿@model VetMvc.Models.Mascota
+@{
+    ViewData["Title"] = "Eliminar Mascota";
+}
+<h1>Eliminar Mascota</h1>
+
+<div class="alert alert-warning mb-3">
+    ¿Seguro que deseas eliminar esta mascota? Esta acción no se puede deshacer.
+</div>
+
+<div class="card">
+    <div class="card-header">Información</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+            <dt class="col-sm-3">Especie</dt>
+            <dd class="col-sm-9">@Model.Especie?.Nombre</dd>
+            <dt class="col-sm-3">Dueño</dt>
+            <dd class="col-sm-9">@Model.Dueno?.Nombres @Model.Dueno?.Apellidos</dd>
+            <dt class="col-sm-3">Sexo</dt>
+            <dd class="col-sm-9">@Model.Sexo</dd>
+            <dt class="col-sm-3">Chip</dt>
+            <dd class="col-sm-9">@Model.Chip</dd>
+        </dl>
+    </div>
+</div>
+
+<form asp-action="Delete" method="post" class="mt-3">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+}
+

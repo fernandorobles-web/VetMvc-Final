@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Inicio";
+}
+<div class="hero shadow-soft">
+    <div class="row align-items-center">
+        <div class="col-lg-7">
+            <h1 class="mb-2">Cuidamos a tus mascotas con cariño y ciencia</h1>
+            <p class="lead mb-3">Agenda, ficha clínica y seguimiento en un solo lugar.</p>
+            <a class="btn btn-primary me-2" asp-controller="Atenciones" asp-action="Create">
+                <i class="bi bi-calendar-plus"></i> Nueva atención
+            </a>
+            <a class="btn btn-outline-primary" asp-controller="Mascotas" asp-action="Create">
+                <i class="bi bi-plus-circle"></i> Registrar mascota
+            </a>
+        </div>
+        <div class="col-lg-5 mt-4 mt-lg-0">
+            <div class="card">
+                <div class="card-header"><i class="bi bi-activity"></i> Resumen</div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between">
+                        <div><span class="badge badge-status-ok">Abierto</span></div>
+                        <div class="text-muted small">Lun–Sáb · 09:00–19:00</div>
+                    </div>
+                    <ul class="mt-3 mb-0">
+                        <li>Vacunas y desparasitación</li>
+                        <li>Cirugías menores</li>
+                        <li>Atención preventiva</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

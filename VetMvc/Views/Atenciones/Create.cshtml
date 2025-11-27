@@ -1,0 +1,56 @@
+﻿@model VetMvc.Models.Atencione
+@{
+    ViewData["Title"] = "Nueva Atención";
+}
+<h1>Nueva Atención</h1>
+
+<form asp-action="Create" method="post">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="mb-3">
+        <label asp-for="MascotaId" class="form-label">Mascota</label>
+        <select asp-for="MascotaId" asp-items="ViewBag.MascotaId" class="form-select"></select>
+        <span asp-validation-for="MascotaId" class="text-danger"></span>
+    </div>
+
+    <div class="row">
+        <div class="mb-3">
+            <label asp-for="FechaHora" class="form-label"></label>
+            <input asp-for="FechaHora" type="datetime-local" class="form-control" step="900" />
+            <span asp-validation-for="FechaHora" class="text-danger"></span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Motivo" class="form-label"></label>
+        <input asp-for="Motivo" class="form-control" />
+        <span asp-validation-for="Motivo" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Diagnostico" class="form-label"></label>
+        <textarea asp-for="Diagnostico" class="form-control" rows="2"></textarea>
+        <span asp-validation-for="Diagnostico" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Tratamiento" class="form-label"></label>
+        <textarea asp-for="Tratamiento" class="form-control" rows="2"></textarea>
+        <span asp-validation-for="Tratamiento" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Costo" class="form-label"></label>
+        <input asp-for="Costo" type="number" step="0.01" inputmode="decimal" class="form-control" />
+        <span asp-validation-for="Costo" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Volver</a>
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

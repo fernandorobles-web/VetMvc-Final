@@ -1,0 +1,71 @@
+﻿@model VetMvc.Models.Mascota
+@{
+    ViewData["Title"] = "Detalle Mascota";
+}
+
+<h1 class="mb-2">Detalle de Mascota</h1>
+
+<h2 class="h4">
+    @Model.Nombre
+    <span class="ms-2 badge badge-specie">@Model.Especie?.Nombre</span>
+    @if (Model.Sexo == "M")
+    {
+        <span class="ms-1 badge badge-sex-m">M</span>
+    }
+    else
+    {
+
+        <span class="ms-1 badge badge-sex-h">H</span>
+    }
+</h2>
+
+<div class="card">
+    <div class="card-header">Información</div>
+    <div class="card-body">
+        <dl class="row">
+            <dt class="col-sm-3">Nombre</dt>
+            <dd class="col-sm-9">@Model.Nombre</dd>
+            <dt class="col-sm-3">Especie</dt>
+            <dd class="col-sm-9">@Model.Especie?.Nombre</dd>
+            <dt class="col-sm-3">Dueño</dt>
+            <dd class="col-sm-9">@Model.Dueno?.Nombres @Model.Dueno?.Apellidos</dd>
+            <dt class="col-sm-3">Sexo</dt>
+            <dd class="col-sm-9">@Model.Sexo</dd>
+            <dt class="col-sm-3">Nacimiento</dt>
+            <dd class="col-sm-9">@Model.FechaNacimiento</dd>
+            <dt class="col-sm-3">Peso (kg)</dt>
+            <dd class="col-sm-9">@Model.PesoKg</dd>
+            <dt class="col-sm-3">Esterilizado</dt>
+            <dd class="col-sm-9">@Model.Esterilizado</dd>
+            <dt class="col-sm-3">Chip</dt>
+            <dd class="col-sm-9">@Model.Chip</dd>
+            <dt class="col-sm-3">Color</dt>
+            <dd class="col-sm-9">@Model.Color</dd>
+            <dt class="col-sm-3">Obs.</dt>
+            <dd class="col-sm-9">@Model.Observaciones</dd>
+        </dl>
+    </div>
+</div>
+
+
+<h5>Atenciones</h5>
+@if (Model.Atenciones != null && Model.Atenciones.Any())
+{
+    <table class="table table-sm">
+        <thead><tr><th>Fecha</th><th>Motivo</th><th>Costo</th></tr></thead>
+        <tbody>
+            @foreach (var a in Model.Atenciones.OrderByDescending(x => x.FechaHora))
+            {
+                <tr><td>@a.FechaHora</td><td>@a.Motivo</td><td>@a.Costo</td></tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+
+    <p><em>Sin atenciones.</em></p>
+}
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<VetMvc.Models.Mascota>
+@{
+    ViewData["Title"] = "Mascotas";
+}
+
+<div class="d-flex gap-2 mb-3">
+    <a asp-action="Create" class="btn btn-success"><i class="bi bi-plus-lg"></i> Nuevo Mascota</a>
+    <a asp-action="ExportExcel" class="btn btn-outline-primary"><i class="bi bi-file-earmark-excel"></i> Excel</a>
+    <a asp-action="ExportPdf" class="btn btn-outline-danger"><i class="bi bi-file-earmark-pdf"></i> PDF</a>
+</div>
+
+<div class="card">
+    <div class="card-header">Listado</div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table mb-0 align-middle">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Especie</th>
+                        <th>Dueño</th>
+                        <th>Sexo</th>
+                        <th>Peso (kg)</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var m in Model ?? Enumerable.Empty<VetMvc.Models.Mascota>())
+                    {
+                        <tr>
+                            <td>
+                                <div class="fw-semibold">@m.Nombre</div>
+                                @* Si quieres mostrar el chip debajo *@
+                                @if (!string.IsNullOrWhiteSpace(m.Chip))
+                                {
+                                    <div class="small text-muted">Chip: @m.Chip</div>
+                                }
+                            </td>
+
+                            <td><span class="badge badge-specie">@m.Especie?.Nombre</span></td>
+
+                            <td>@(m.Dueno != null ? m.Dueno.Nombres + " " + m.Dueno.Apellidos : "-")</td>
+
+                            <td>
+                                @if (m.Sexo == "M")
+                                {
+                                    <span class="badge badge-sex-m">M</span>
+                                }
+                                else
+                                {
+
+                                    <span class="badge badge-sex-h">H</span>
+                                }
+                            </td>
+
+                            <td>@m.PesoKg</td>
+
+                            <td class="text-end">
+                                <a asp-action="Details" asp-route-id="@m.Id" class="btn btn-sm btn-secondary">Ver</a>
+                                <a asp-action="Edit" asp-route-id="@m.Id" class="btn btn-sm btn-warning">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@m.Id" class="btn btn-sm btn-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
